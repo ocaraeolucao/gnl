@@ -6,23 +6,13 @@
 /*   By: luvieira <luvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 20:51:46 by luvieira          #+#    #+#             */
-/*   Updated: 2026/06/10 19:03:01 by luvieira         ###   ########.fr       */
+/*   Updated: 2026/06/10 21:27:08 by luvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
-
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+static void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	unsigned char		*d;
 	const unsigned char	*s;
@@ -37,6 +27,16 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 		i++;
 	}
 	return (dest);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
