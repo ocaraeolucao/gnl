@@ -33,6 +33,8 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
+	if (!s)
+		return (0);
 	i = 0;
 	while (s[i] != '\0')
 		i++;
@@ -62,6 +64,8 @@ char	*ft_strchr(const char *s, int c)
 {
 	int	i;
 
+	if (!s)
+		return (NULL);
 	i = 0;
 	while (s[i] != '\0')
 	{
@@ -69,34 +73,25 @@ char	*ft_strchr(const char *s, int c)
 			return ((char *)&s[i]);
 		i++;
 	}
-	if ((char) c == '\0')
-		return ((char *)&s[i]);
 	return (NULL);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char			*substr;
-	size_t			stringlen;
-	unsigned int	i;
+	size_t			i;
 
 	if (!s)
 		return (NULL);
-	stringlen = ft_strlen(s);
-	if ((size_t) start < stringlen)
+	substr = (char *)malloc(len + 1);
+	if (!substr)
+		return (NULL);
+	i = 0;
+	while (s[start + i] != '\0' && i < len)
 	{
-		substr = (char *)malloc(allocsize(stringlen, start, len) + 1);
-		if (!substr)
-			return (NULL);
-		i = 0;
-		while (s[start + i] != '\0' && (size_t)i < len)
-		{
-			substr[i] = s[start + i];
-			i++;
-		}
-		substr[i] = '\0';
+		substr[i] = s[start + i];
+		i++;
 	}
-	else
-		return (ft_strdup(""));
+	substr[i] = '\0';
 	return (substr);
 }

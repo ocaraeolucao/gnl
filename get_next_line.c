@@ -33,11 +33,11 @@ static void	substr(char **line, char **dump, size_t counter)
 	char	*temp;
 	size_t	dumpcount;
 
-	dumpcount = ft_strlen(*line) - (counter + 1);
+	dumpcount = ft_strlen(*line) - counter;
 	if (ft_strchr(*line, '\n'))
 	{
-		*dump = ft_substr(*line, counter + 1, dumpcount);
-		temp = ft_substr(*line, 0, counter + 1);
+		*dump = ft_substr(*line, counter, dumpcount);
+		temp = ft_substr(*line, 0, counter);
 		free(*line);
 		*line = temp;
 	}
@@ -90,7 +90,7 @@ char	*get_next_line(int fd)
 		while (line[counter] != '\n')
 			counter++;
 	dump = NULL;
-	substr(&line, &dump, counter);
+	substr(&line, &dump, counter + 1);
 	if (line[0] == '\0')
 	{
 		free(line);
