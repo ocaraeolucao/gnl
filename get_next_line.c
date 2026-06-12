@@ -6,7 +6,7 @@
 /*   By: luvieira <luvieira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 18:41:57 by luvieira          #+#    #+#             */
-/*   Updated: 2026/06/10 21:17:45 by luvieira         ###   ########.fr       */
+/*   Updated: 2026/06/12 19:30:52 by luvieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static void	substr(char **line, char **dump, size_t counter)
 	char	*temp;
 	size_t	dumpcount;
 
-	dumpcount = ft_strlen(*line) - counter;
 	if (ft_strchr(*line, '\n'))
 	{
+		dumpcount = ft_strlen(*line) - counter;
 		*dump = ft_substr(*line, counter, dumpcount);
 		temp = ft_substr(*line, 0, counter);
 		free(*line);
