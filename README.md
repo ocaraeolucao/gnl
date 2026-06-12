@@ -88,20 +88,23 @@ Project Parts: [e.g., Explaining the concept of static function, file descriptor
 ## Algorithm Explanation & Justification
 
 ### The Challenge
+
 The core problem get_next_line solves is the unpredictability of read(). When we call read(fd, buffer, BUFFER_SIZE), it fetches chunks of bytes blindly. A single read chunk might contain:
 
-Exactly one line.
+**Exactly one line**
 
-Only a fraction of a line.
+**Only a fraction of a line**
 
-Multiple lines at once.
+**Multiple lines at once**
 
 If it reads multiple lines, the function must return the first line immediately, but somehow "remember" the remaining characters for the next time get_next_line is called.
 
 ### Selected Algorithm: The "Read, Extract, and Save" Approach
+
 To solve this efficiently, the algorithm relies on a Static Pointer (static char *backup) and follows a strict 3-step pipeline.
 
 * **Read and Accumulate (The Loop)**
+
 The function initializes a temporary buffer using malloc based on the BUFFER_SIZE. It enters a loop that calls read().
 
 After each successful read, the newly read bytes are concatenated (ft_strjoin) with whatever was already stored in the backup static variable.
@@ -111,6 +114,7 @@ The loop continues until a newline character (\n) is found inside backup, or unt
 Justification: This ensures we only perform system calls when necessary. We accumulate just enough data to find at least one complete line.
 
 * **Extract the Line**
+
 Once the loop breaks (meaning we have at least one \n or reached EOF), we isolate the line to be returned.
 
 We iterate through the backup string until we hit the \n.
@@ -122,6 +126,7 @@ We copy the characters into this new string. This string is our final line.
 Justification: Memory efficiency. We return exactly what was requested, no more, no less, ensuring the caller gets a perfectly formatted string.
 
 * **Update the Static Variable (The Leftovers)**
+
 This is the most crucial step. Since we extracted the first line, we must save the rest of the string for future calls.
 
 We create a new string containing everything in backup that came after the \n.
