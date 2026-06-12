@@ -25,43 +25,43 @@ The project must be compiled with the -D BUFFER_SIZE=n flag, which defines the b
 
 Create an C file called 'main.c' and include this on the scope:
 
-#include "get_next_line.h"
-#include <stdio.h>
-#include <fcntl.h>
+    #include "get_next_line.h"
+    #include <stdio.h>
+    #include <fcntl.h>
 
-int main(void)
-{
-    int     fd;
-    char    *line;
-    int     readed_lines;
-
-    fd = open("test.txt", O_RDONLY);
-    
-    if (fd == -1)
+    int main(void)
     {
-        printf("Error readind the file.\n");
-        return (1);
-    }
-
-    readed_lines = 1;
+        int     fd;
+        char    *line;
+        int     readed_lines;
     
-    while (1)
-    {
-        line = get_next_line(fd);
-        if (line == NULL)
-            break ;
-            
-        printf("Line %d: %s", readed_lines, line);
+        fd = open("test.txt", O_RDONLY);
         
-        free(line); 
-        readed_lines++;
-    }
-
-    printf("\n--- End of the file ---\n");
+        if (fd == -1)
+        {
+            printf("Error readind the file.\n");
+            return (1);
+        }
     
-    close(fd);
-    return (0);
-}
+        readed_lines = 1;
+        
+        while (1)
+        {
+            line = get_next_line(fd);
+            if (line == NULL)
+                break ;
+                
+            printf("Line %d: %s", readed_lines, line);
+            
+            free(line); 
+            readed_lines++;
+        }
+    
+        printf("\n--- End of the file ---\n");
+        
+        close(fd);
+        return (0);
+    }
 
 Then compile the project linking the created file:
 
